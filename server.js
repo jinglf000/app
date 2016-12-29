@@ -30,7 +30,8 @@ app.use(methodOverride());
 // 路由控制
 app.get("/",function(req,res){
     res.sendfile("./src/index.html");
+}).get("/login",function(req,res){
+    res.sendfile("./src/login.html");
 });
-
 app.listen(app.get('port'));
 console.log("server is runing");

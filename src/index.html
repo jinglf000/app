@@ -2,20 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test APP</title>
+    <title>angular $scope</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Microsoft YaHei";
+        }
+        #box{
+            width: 400px;
+            height: 500px;
+            margin: 50px auto;
+            background-color: #2997d0;
+            color: #fff;
+            padding: 5px;
+            line-height: 32px;
+        }
+    </style>
 </head>
-<body>
-    <h1>这是一个测试用例</h1>
-    <h4>项目运行在node提供的web服务上面</h4>
-    <hr>
-    <ul>
-        <li>dist 发布环境</li>
-        <li>node-modules node模块</li>
-        <li>src 开发环境</li>
-        <li>server.js node web服务</li>
-        <li>gulpfile.js gulp 自动化服务配置文件</li>
-        <li>package.json app 项目node模块配置</li>
-    </ul>
+<body ng-app>
+<div id="box">
+    这是一个angular容器
+    <p><input type="text" name="" ng-model="user.name"></p>
+    <p>{{user.name}}</p>
+</div>
 </body>
-<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="framework/angular/angular.js"></script>
+<!-- <script type="text/javascript" src="framework/jquery-1.9.1.min.js"></script> -->
+<script type="text/javascript">
+
+
+</script>
 </html>

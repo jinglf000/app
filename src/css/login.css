@@ -1,0 +1,18 @@
+/* bootstrap media样式 */
+
+/* 小屏幕 <= 720px */
+@media (min-width: 720px){
+
+}
+/* 中等屏幕 <= 1080px */
+@media (min-width: 1080px){
+
+}
+/* 大屏幕 > = 1280px */
+@media (min-width: 1280px){
+
+}
+
+.col-sm-2 {
+    padding: 0;
+}
