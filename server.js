@@ -19,7 +19,7 @@ app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname,"/src")));
 
 // 中间件 用于处理
-app.use(favicon(__dirname + '/src/images/favicon.ico'));
+app.use(favicon(__dirname + '/src/images/logo_.png'));
 app.use(logger('dev'));
 
 // parse application/json

@@ -1,47 +1,50 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>登录管理系统</title>
-    <link href="./framework/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./css/login.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>管理系统登陆</title>
+	<link rel="stylesheet" type="text/css" href="framework/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<script type="text/javascript" src="framework/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="framework/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="framework/angular/angular.js"></script>
+	<script type="text/javascript" src="framework/angular/angular-messages.js"></script>
+	<script type="text/javascript" src="js/controller_login.js"></script>
 </head>
-<body>
-    <div class="containter-fluid">
-        <form action="" role="form" class="form-horizontal" >
-            <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">用户名：</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="邮箱或手机号">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">密码：</label>
-                <div class="col-sm-10">
-                    <input type="password" name="password" id="password" placeholder="" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <label for="">
-                        <input type="checkbox" name="" id="">自动登录
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <input type="submit" value="登录" class="btn btn-default">
-                </div>
-            </div>
-
-        </form>
-    </div>  
-
+<body ng-app="login" ng-controller="appLogin">
+	<div class="container">
+		<div class="row">
+			<form role="form" novalidate name="loginForm" ng-submit='loginSubmit()'>
+				<h3 class="form-title">登录管理系统</h3>
+				<div class="form-group">
+					<label for="user">用户名：</label>
+					<input type="text" placeholder="邮箱或手机号" name="user" id="user" class="form-control" ng-model="user" required check-user maxlength="64" >
+					<span ng-messages="loginForm.user.$error"  ng-show="loginForm.user.$dirty && loginForm.user.$invalid" class="error_msg"> 
+						<span ng-messages-include="tem/error/errorMsg.html"></span>   
+        			</span>
+				</div>
+				<div class="form-group">
+					<label for="pass">密码：</label>
+					<input type="password" name="pass" id="pass" class="form-control" ng-model="pass" required> 
+					<span class="error_msg" ng-show="loginForm.pass.$dirty && loginForm.pass.$invalid">
+						<span ng-show="loginForm.pass.$error.required">请输入密码</span>
+					</span>
+				</div>				
+				<div class="form-group">
+					<div class="checkbox">
+						<label >
+							<input type="checkbox" name="checkbox" value="on" ng-model="autoLogin"> <span>自动登录</span>
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" name="submit" class="btn btn-success" value="登陆" id="form_submit" ng-disabled="loginForm.user.$invalid || loginForm.pass.$invalid">
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
-<script type="text/javascript" src="./framework/angular/angular.js"></script>
-<script type="text/javascript" src="./framework/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="./framework/bootstrap/js/bootstrap.min.js"></script>
 
 </html>
