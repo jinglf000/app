@@ -1,15 +1,33 @@
 // module
 var login = angular.module("login",['ngMessages']);
 // controller
-login.controller("appLogin",["$scope","$http",function($scope,$http){
+login.controller("appLogin",["$scope","$http","$window",function($scope,$http,$window){
     $scope.loginSubmit = function(){
         var postData = {
             user : $scope.user,
             pass : $scope.pass,
             autoLogin : $scope.autoLogin
         };
-        console.log(postData);
-        
+        // console.log(postData);
+        var req = {
+            method : "POST",
+            url : "/in",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            data : postData
+        }
+        $http(req).then(function(result){
+            // success
+            console.log(result,"success");
+            if(result.data.code == "1"){
+                $window.location.href = "index.html";
+                // $location.url("index.html");
+            }
+        },function(data){
+            // fail
+            console.log(data);
+        });
     };
 }]);
 
