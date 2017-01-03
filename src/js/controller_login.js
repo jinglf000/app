@@ -12,9 +12,6 @@ login.controller("appLogin",["$scope","$http","$window",function($scope,$http,$w
         var req = {
             method : "POST",
             url : "/in",
-            headers : {
-                "Content-Type" : "application/json"
-            },
             data : postData
         };
         $http(req).then(function(result){

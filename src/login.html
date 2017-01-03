@@ -24,7 +24,7 @@
                        required check-user maxlength="64">
                 <span ng-messages="loginForm.user.$error" ng-show="loginForm.user.$dirty && loginForm.user.$invalid"
                       class="error_msg">
-						<span ng-messages-include="tem/error/errorMsg.html"></span>   
+						<span ng-messages-include="tem/error/errorMsg.html"></span>
         			</span>
             </div>
             <div class="form-group">
@@ -33,21 +33,23 @@
                 <span class="error_msg" ng-show="loginForm.pass.$dirty && loginForm.pass.$invalid">
 						<span ng-show="loginForm.pass.$error.required">请输入密码</span>
 					</span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="checkbox" value="on" ng-model="autoLogin"> <span>自动登录</span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" name="submit" class="btn btn-success" value="登陆" id="form_submit"
-                       ng-disabled="loginForm.user.$invalid || loginForm.pass.$invalid">
-            </div>
-        </form>
-    </div>
-</div>
+				</div>
+				<div class="form-group">
+					<div class="checkbox">
+						<label >
+							<input type="checkbox" name="checkbox" value="on" ng-model="autoLogin"> <span>自动登录</span>
+						</label>
+						<div class="reg-div">
+							<a href="register.html">新用户？点击注册</a>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" name="submit" class="btn btn-success" value="登陆" id="form_submit" ng-disabled="loginForm.user.$invalid || loginForm.pass.$invalid">
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 
 </html>
