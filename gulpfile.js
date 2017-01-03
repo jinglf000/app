@@ -6,6 +6,7 @@ var jshint = require('gulp-jshint');  // 检查js
 var concat = require('gulp-concat'); // 合并文件
 var uglify = require('gulp-uglify'); // 压缩文件
 var rename = require('gulp-rename');  // 重命名
+var img
 
 // 检查js脚本 
 gulp.task('jshint',function(){
@@ -22,15 +23,16 @@ gulp.task('scripts',function(){
         .pipe(gulp.dest('.dist'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./dist/js'));
         console.log('合并、重命名、压缩 执行成功！');//自定义提醒信息
 });
 
+
 // 定义默认
 gulp.task('default', function(){
-    gulp.run('lint', 'scripts');
+    gulp.run('jshint', 'scripts');
     // 监听js文件变化，当文件发生变化后会自动执行任务
     gulp.watch('./src/js/*.js', function(){
-        gulp.run('lint','scripts');
+        gulp.run('jshint','scripts');
     });
 });

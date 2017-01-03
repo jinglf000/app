@@ -16,7 +16,7 @@ login.controller("appLogin",["$scope","$http","$window",function($scope,$http,$w
                 "Content-Type" : "application/json"
             },
             data : postData
-        }
+        };
         $http(req).then(function(result){
             // success
             console.log(result,"success");
@@ -67,5 +67,5 @@ login.directive("checkUser",['$http','$q',function($http,$q){
             //     return deferred.promise;
             // }
         }
-    }    
+    };
 }]);
