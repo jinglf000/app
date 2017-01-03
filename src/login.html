@@ -20,7 +20,7 @@
 				<h3 class="form-title">登录管理系统</h3>
 				<div class="form-group">
 					<label for="user">用户名：</label>
-					<input type="text" placeholder="邮箱或手机号" name="user" id="user" class="form-control" ng-model="user" required check-user maxlength="64" >
+					<input type="text" placeholder="邮箱或手机号" name="user" id="user" class="form-control" ng-model="user" required check-user maxlength="64" ng-model-options="{ updateOn : 'blur' }" >
 					<span ng-messages="loginForm.user.$error"  ng-show="loginForm.user.$dirty && loginForm.user.$invalid" class="error_msg"> 
 						<span ng-messages-include="tem/error/errorMsg.html"></span>   
         			</span>
@@ -37,6 +37,9 @@
 						<label >
 							<input type="checkbox" name="checkbox" value="on" ng-model="autoLogin"> <span>自动登录</span>
 						</label>
+						<div class="reg-div">
+							<a href="register.html">新用户？点击注册</a>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">

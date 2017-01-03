@@ -28,9 +28,9 @@ gulp.task('scripts',function(){
 
 // 定义默认
 gulp.task('default', function(){
-    gulp.run('lint', 'scripts');
+    gulp.run('jshint', 'scripts');
     // 监听js文件变化，当文件发生变化后会自动执行任务
     gulp.watch('./src/js/*.js', function(){
-        gulp.run('lint','scripts');
+        gulp.run('jshint','scripts');
     });
 });
