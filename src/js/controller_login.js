@@ -44,7 +44,7 @@ login.directive("checkUser",['$http','$q',function($http,$q){
         require : 'ngModel',
         link : function($scope,element,attrs,ctrl){
             // 同步验证 model值 和 view值
-            ctrl.$validators.char = function(modelValue,viewValue){
+            ctrl.$validators.username = function(modelValue,viewValue){
                 var value = modelValue || viewValue;
                 if(!valid_username.test(value)){
                     return false;

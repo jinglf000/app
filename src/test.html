@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 测试页面</title>
+    <script type="text/javascript" src="framework/angular/angular.js"></script>
+</head>
+<body ng-app="myApp">
+    <mike>
+        <br/>
+        <span>the first mike</span><br/>
+        <span>the second mike</span>
+        <span>the third mike</span>
+        <p>p 标签显示，这个标签定义在在span里面</p>
+        <a>a标签是定义在p标签内部，同样可以通过ng-transclude显示</a>
+        <h>h标签自定义在a标签内部,同样可以显示在页面上面</h>
+    </mike>
+    110
+    <test></test>
+</body>
+<script type="text/javascript">
+    var APP = angular.module('myApp', []);
+    APP.directive('mike',function() {
+        return {
+            restrict: 'E',
+            template: '<div>Hi angularjs
+            <span ng-transclude>
+            <p ng-transclude>
+            <a ng-transclude>
+            <h ng-transclude></h>
+            </a></p></span></div>',
+            //自定义的标签内部出现了子标签div里面有个span，可以用ng-transclude解决这个问题.
+            transclude: true
+        };
+    });
+
+</script>
+</html>

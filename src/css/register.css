@@ -1,1 +1,30 @@
 /* 注册页面样式表 */
+.container{
+    width: 800px;
+}
+.form-title{
+    text-align: center;
+    line-height: 2;
+}
+.form-group{
+    position: relative;
+    margin: 20px 0;
+}
+/* 错误提示信息span和input */
+.error_msg{
+    color: red;
+    position: absolute;
+    font-size: 12px;
+}
+.error_msg span{
+    font-size: 12px;
+}
+input.ng-invalid.ng-dirty{
+    border: 1px solid red;
+}
+input.ng-invalid.ng-dirty:focus{
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255,0,0,.24)
+}
+.reg-div{
+    float: right;
+}
