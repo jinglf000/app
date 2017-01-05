@@ -5,34 +5,36 @@
     <title>angular 测试页面</title>
     <script type="text/javascript" src="framework/angular/angular.js"></script>
 </head>
-<body ng-app="myApp">
-    <mike>
-        <br/>
-        <span>the first mike</span><br/>
-        <span>the second mike</span>
-        <span>the third mike</span>
-        <p>p 标签显示，这个标签定义在在span里面</p>
-        <a>a标签是定义在p标签内部，同样可以通过ng-transclude显示</a>
-        <h>h标签自定义在a标签内部,同样可以显示在页面上面</h>
-    </mike>
+<body ng-app="myApp" ng-controller="myappController">
     110
-    <test></test>
+    <h4>{{test.name}}</h4>
+    <p>{{test.add1}}</p>
+    <button ng-click="test.add(1)"> click </button>
+    <p ng-controller="childController">{{child}}</p>
+    <input type="text" ng-model="hello">
+    <p>{{test.nameParse}}</p>
 </body>
 <script type="text/javascript">
     var APP = angular.module('myApp', []);
-    APP.directive('mike',function() {
-        return {
-            restrict: 'E',
-            template: '<div>Hi angularjs
-            <span ng-transclude>
-            <p ng-transclude>
-            <a ng-transclude>
-            <h ng-transclude></h>
-            </a></p></span></div>',
-            //自定义的标签内部出现了子标签div里面有个span，可以用ng-transclude解决这个问题.
-            transclude: true
+    APP.controller("myappController",["$scope","$parse",function($scope,$parse){
+        $scope.test = {
+            name : "hello ss world",
+            add1 : 1,
+            add : function (num) {
+                this.add1 ++;
+                console.log(this); // this 指的是$scope.test 这个对象
+            }
         };
-    });
-
+        $scope.$watch('hello',function (newVal,oldVal,scope) {
+            if(newVal !== oldVal){
+                $scope.test.nameParse = $parse(newVal)(scope);
+            }
+        })
+    }]);
+    APP.controller("childController",["$scope",function($scope){
+        $scope.child = {
+            name : "child"
+        }
+    }]);
 </script>
 </html>
