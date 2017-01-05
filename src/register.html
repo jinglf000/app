@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="user" class="col-sm-2 control-label">用户名：</label>
                     <div class="col-sm-10">
-                        <input type="text" id="user" name="user" ng-model="user" class="form-control" required check-user maxlength="32">
+                        <input type="text" id="user" name="user" ng-model="user" class="form-control" required check-user maxlength="32" ng-blur="print()">
                         <span ng-messages="regForm.user.$error" ng-show="regForm.user.$dirty && regForm.user.$invalid" class="error-msg">
                             <span ng-messages-include="tem/error/errorMsg.html"></span>
                         </span>

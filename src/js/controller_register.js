@@ -3,13 +3,17 @@
  */
 var register = angular.module("reg",[]);
 register.controller("regControl",['$scope',function ($scope) {
-
-    $scope.check_equal = function () {
-        if($scope.regForm.pass.$modelValue != $scope.regForm.confirmPass.$modelValue){
-            $scope.regForm.confirmPass.$invalid = true;
-            $scope.regForm.confirmPass.$error.no_equal = false;
-        }
+    $scope.print = function(){
+        console.log($scope.regForm.user);
+        $scope.regForm.user += "xyz";
     }
+
+    // $scope.check_equal = function () {
+    //     if($scope.regForm.pass.$modelValue != $scope.regForm.confirmPass.$modelValue){
+    //         $scope.regForm.confirmPass.$invalid = true;
+    //         $scope.regForm.confirmPass.$error.no_equal = false;
+    //     }
+    // }
 }])
 register.directive("checkUser",['$http','$q',function($http,$q){
     // email + cellPhone
