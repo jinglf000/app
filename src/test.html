@@ -13,6 +13,24 @@
     <p ng-controller="childController">{{child}}</p>
     <input type="text" ng-model="hello">
     <p>{{test.nameParse}}</p>
+    <p>下面是自定义指令</p>
+    <hr>
+    <hello>
+            <span>亚拉锁</span>
+            <p>这是一个p</p>
+    </hello>
+    <hr>
+    <linkfun></linkfun>
+    <hr>
+    <h2>表单验证：</h2>
+    <form name="reg" novalidate>
+        <label name="email">email:</label>
+        <input type="email"
+            name = "email"
+           ng-model="email" placeholder="email"
+        >
+        <input type="button" value="clickValue" ng-click="changeValue()">
+    </form>
 </body>
 <script type="text/javascript">
     var APP = angular.module('myApp', []);
@@ -29,12 +47,48 @@
             if(newVal !== oldVal){
                 $scope.test.nameParse = $parse(newVal)(scope);
             }
-        })
+        });
+        $scope.changeValue = function(){
+            $scope.email = "手动的设定的值"
+        }
+
     }]);
     APP.controller("childController",["$scope",function($scope){
         $scope.child = {
             name : "child"
         }
     }]);
+    // 自定义指令 用来扩充 html标签，使得标签更加语义话
+    APP.directive("hello" , function(){ // transclude 和 replace可以同时使用，两个属性默认都是false；ransclude会对嵌套进去的元素进行处理，处理办法就是
+        return {// 会把原本指令里面的内容放到： template里面含有 ng-transclude的标签里面，想当于套进了里面,但同时他会把里面的内容给替换掉
+            restrict : "E",
+            template : "<p> hell --- world <span ng-transclude></span></p>",
+            transclude : true,
+            replace : true// 在替换的时候，若是元素 自定义标签上的属性，会被放到替换后的标签上，
+        }
+    });
+    APP.directive("linkfun",function () {
+        return {
+            restrict : "AE",
+            template : "<div>" +
+            "<p class='toggle' ng-click='toggle()'>{{link.title}}</p>" +
+            "<p class='toggle_content' ng-show='link.showMe' ng-transclude>这里是隐藏的内容，用来实现显示隐藏效果；</p>" +
+            "</div>",
+            transclude : true,
+            replace : true,
+            link : function (scope ,element,attrs) {
+                scope.link = {
+                    showMe : false,
+                    title : "点击显示或隐藏"
+                }
+                scope.toggle = function () {
+                    scope.link.showMe = !scope.link.showMe;
+                }
+            }
+
+
+
+        }
+    })
 </script>
 </html>

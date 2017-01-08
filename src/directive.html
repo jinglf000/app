@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="appcon">
+<head>
+    <meta charset="UTF-8">
+    <title>指令系统</title>
+    <style>
+        *{
+            /*margin: 0;*/
+            /*padding: 0;*/
+        }
+        .tog{
+            border: 1px solid #000;
+            margin: 10px 0;
+            padding: 0;
+        }
+        .toggle{
+            background-color: #000;
+            color: #ffff00;
+        }
+    </style>
+    <script type="text/javascript" src="framework/angular/angular.js"></script>
+</head>
+<body>
+    <p>下面是自定义指令</p>
+    <p>这里面的内容是两个独立的作用域之间的双向绑定数据绑定{{hell}}</p>
+    <input type="button" ng-click="linkcon()" value="click">
+    <hr>
+    <linkfun link-title="title" link-name="{{yes}}" yes="hell" link-con="linkcon()">{{text}}</linkfun>
+    <p test>这是一个test呀呀呀</p>
+    <hr>
+    <p>过滤器{{toworld}}</p>
+    <p>日期过滤器 {{filterHello | number:2}}</p>
+    <p>date : {{today | date:'short'}}</p>
+    <hr>
+    <p>json : {{jsonData | json}}</p>
+    <hr>
+    <ul>
+        <li ng-repeat=" x in arr | orderBy :'age'  "> {{x}}</li>
+    </ul>
+</body>
+<script>
+    var app = angular.module("app",[]);
+    app.controller("appcon",function($scope,$filter){
+        $scope.title = "点击展开：";
+        $scope.hell = "this is hello 亚所"
+        $scope.yes = "哈撒给~~ 亚所"
+        $scope.text = "这里是内容呀";
+        $scope.linkcon = function(){
+            console.log(this);// 打印当前作用域对象
+//            $scope.hell = "1101010101";
+        };
+        $scope.toworld = $filter('uppercase')('niho ___dsJING');
+        $scope.filterHello = "454561.2546";
+        $scope.today = new Date();
+        $scope.jsonData = {
+            name : "liuyang",
+            age : "24",
+            phone : "15503714903"
+        };
+        $scope.fn = {
+            year : function(a,b){
+                return parseInt(a) - parseInt(b);
+            }
+        }
+        $scope.arr = [
+            {
+                name : "liuyang",
+                age : "29",
+                phone : "18516993208"
+            },
+            {
+                name : "jinglongfei",
+                age : "24",
+                phone : "15503714903"
+            },
+            {
+                name : "duqingzhao",
+                age : "26",
+                phone : "18103853085"
+            },
+            {
+                name : "dengjuzhen",
+                age : "25",
+                phone : "xxxxxxxxxxxx"
+            }
+        ];
+
+    });
+    app.directive("linkfun",function () {
+        return {
+            restrict : "AE",
+            template : "<div class='tog'>" +
+            "<p class='toggle' ng-click='toggle()'>{{title}}</p>" +
+            "<p class='toggle_content' ng-show='showMe' ng-transclude>这里是隐藏的内容，用来实现显示隐藏效果；</p>" +
+            "<input type='text' value='click' ng-model='yes'>" +
+            "<button ng-click='changeColor()'>yes</button>" +
+            "</div>",
+            transclude : true,
+            replace : true,
+            scope : { // scope 默认值是 false 不会形成私有作用域，true 会生成子作用域，继承父作用域，当scope是对象的时候会形成隔离的作用域，不会继承
+                title : "@linkName",// 但是可以通过@ & = 来访问夫作用域，@ 单项绑定 = 双向 & 函数
+                changeColor : "&linkCon",
+                yes : "="
+            },
+            link : function (scope ,element,attrs) {
+                scope.title = "hahh click";
+//                scope.yes = "你好呀！！！";
+                scope.showMe = false;
+                scope.toggle = function () {
+                    scope.showMe = !scope.showMe;
+                }
+            }
+        }
+    });
+
+</script>
+</html>
