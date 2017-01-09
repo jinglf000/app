@@ -44,7 +44,7 @@ var userSchema = new schema({
 });
 var userModel = mongoose.model('logins',userSchema);
 var app = express();
-app.post
+
 // 设定 port 变量，访问端口
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname,'views'));
