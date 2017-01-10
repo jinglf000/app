@@ -17,6 +17,22 @@
             background-color: #000;
             color: #ffff00;
         }
+        /* 动画测试 */
+        #box{
+            width: 200px;
+            height:200px;
+            background-color: orangered;
+            border-radius : 5px;
+            position: relative;
+            transition: 2s  ease background ;
+            opacity: 1;
+        }
+        #box:hover{
+            /*opacity: 0.2;*/
+            background-color: #2997d0;
+            /*width: 400px;*/
+            /*height: 400px;*/
+        }
     </style>
     <script type="text/javascript" src="framework/angular/angular.js"></script>
 </head>
@@ -37,6 +53,7 @@
     <ul>
         <li ng-repeat=" x in arr | orderBy :'age'  "> {{x}}</li>
     </ul>
+    <div id="box"></div>
 </body>
 <script>
     var app = angular.module("app",[]);

@@ -74,6 +74,9 @@ app.get("/",function(req,res){
 }).get("/login",function(req,res){
     res.sendfile("./src/login.html");
 });
+app.get("/app/userCheck",function (req,res) {
+	
+})
 app.post("/in",function(req,res){
 	// req_data post请求的数据
 	var req_data = req.body

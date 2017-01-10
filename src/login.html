@@ -21,7 +21,8 @@
             <div class="form-group">
                 <label for="user">用户名：</label>
                 <input type="text" placeholder="邮箱或手机号" name="user" id="user" class="form-control" check-user ng-model="user"
-                       required check-user maxlength="64" ng-model-options="{ updateOn: 'blur' }">
+                       required check-user maxlength="64" >
+                <!--ng-model-options="{ updateOn: 'blur' }"-->
                 <span ng-messages="loginForm.user.$error" ng-show="loginForm.user.$dirty && loginForm.user.$invalid"
                       class="error_msg">
 						<span ng-messages-include="tem/error/errorMsg.html"></span>
