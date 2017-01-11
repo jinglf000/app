@@ -1,4 +1,9 @@
 /* 注册页面样式表 */
+body{
+    background-color: #edeff0;
+    background-image : url("../images/index-bg.svg");
+}
+
 .container{
     width: 600px;
 }
@@ -15,6 +20,7 @@
     color: red;
     position: absolute;
     font-size: 12px;
+    /*display: none;*/
 }
 .error_msg span{
     font-size: 12px;

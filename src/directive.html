@@ -57,7 +57,7 @@
 </body>
 <script>
     var app = angular.module("app",[]);
-    app.controller("appcon",function($scope,$filter){
+    app.controller("appcon",function($scope,$filter,$q){
         $scope.title = "点击展开：";
         $scope.hell = "this is hello 亚所"
         $scope.yes = "哈撒给~~ 亚所"
@@ -101,7 +101,24 @@
                 phone : "xxxxxxxxxxxx"
             }
         ];
-
+        // 这里是一个 $q 异步对象的测试
+        var deferred = $q.defer();
+        var promised = deferred.promise;
+        promised.then(function(data){// then 函数返回的也是promise对象，用于继续异步调用
+            // 多个then 类似于多个管道，从 deferred.resolve(data)中的参数data被传递到第一个then函数里面
+            // 同时第二个 then 会收到 第一个then的返回值，就像管道一样；
+            // 同时在 then函数里面 是不能够通过 修改 deferred.inject() 来改变下一步的异步处理
+            // 但是可以通过 return $q.reject("参数来")；来处理
+            console.log("promise resolve 异步成功的方法+++++++++" + data) ;
+            return $q.reject("手动触发了下一步 promise 错误处理");  
+        },function(data){
+            console.log("异步执行失败了，譬如接口返回错误了，++++++++————————" + data);
+        }).then(function(data){
+            console.log("promise de 第二个成功处理函数" + data);
+        }, function(data){
+            console.log("promise de 第二个失败的处理函数" + data);
+        });
+        deferred.resolve("hello++++++++++++fail");
     });
     app.directive("linkfun",function () {
         return {

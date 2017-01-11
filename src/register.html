@@ -22,7 +22,8 @@
                     <label for="user" class="col-sm-2 control-label">用户名：</label>
                     <div class="col-sm-10">
                         <input type="text" id="user" name="user" ng-model="user" class="form-control"
-                               required check-user maxlength="32" placeholder="用户名为邮箱或者手机号">
+                            required check-user maxlength="32" placeholder="用户名为邮箱或者手机号"
+                            >
                         <span ng-messages="regForm.user.$error"
                               class="error_msg"
                               ng-show="regForm.user.$dirty && regForm.user.$invalid"
@@ -30,7 +31,7 @@
                         >
                             <span ng-message="required">用户名不能为空</span>
                             <span ng-message="checkUser">用户名为邮箱或者手机号</span>
-                            <span ng-message="checkUserAsync">用户名为邮箱或者手机号</span>
+                            <span ng-message="checkUserAsync">用户名已被使用</span>
                         </span>
                     </div>
                 </div>
