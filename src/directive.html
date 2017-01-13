@@ -54,6 +54,10 @@
         <li ng-repeat=" x in arr | orderBy :'age'  "> {{x}}</li>
     </ul>
     <div id="box"></div>
+    <!-- 当我这样去做的时候 两个输入框的值也是同步的 -->
+    <input type="text" ng-model="repeat">
+    <input type="text" ng-model="repeat">
+    <p>{{repeat}}</p>
 </body>
 <script>
     var app = angular.module("app",[]);

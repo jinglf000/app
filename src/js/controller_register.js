@@ -2,14 +2,27 @@
  * Created by jinglf on 2017/1/4.
  */
 var register = angular.module("reg",['ngMessages']);
-register.controller("regControl",['$scope',function ($scope) {
-
-    // $scope.check_equal = function () {
-    //     if($scope.regForm.pass.$modelValue != $scope.regForm.confirmPass.$modelValue){
-    //         $scope.regForm.confirmPass.$invalid = true;
-    //         $scope.regForm.confirmPass.$error.no_equal = false;
-    //     }
-    // }
+register.controller("regControl",['$scope','$http','$window',function ($scope,$http,$window) {
+    $scope.registerForm = function () {
+        $http({
+            "url" : "/app/register",
+            "method" :"POST",
+            "data" : {
+                user :$scope.reg.user,
+                pass :$scope.reg.pass,
+                name :$scope.reg.name,
+                age  :$scope.reg.age,
+                phone  :$scope.reg.phone || ""
+            }
+        }).then(function (response) {
+            if(response.data.code){
+                $window.alert("恭喜你注册成功！");
+                $window.location.href ="/login";
+            }
+        },function (response) {
+            console.log(response);
+        });
+    };
 }]);
 //这两种都是数据验证方式 各有优劣，先执行 $parse ---> $validators
 

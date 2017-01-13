@@ -7,10 +7,6 @@ var logger         = require('morgan');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var querystring = require("querystring");
-var assert = require("assert");
-
-
-
 function route(app,dbModels){
     // 路由控制
     app.get("/",function(req,res){
@@ -22,7 +18,7 @@ function route(app,dbModels){
 
         var user_data = req.query.user;
         console.log(user_data);
-         dbModels.userModel.findOne({"user":user_data},function(err,data){
+        dbModels.userModel.findOne({"user":user_data},function(err,data){
             assert.equal(null,err);
             var res_data = {};
             if(!data){
@@ -33,12 +29,11 @@ function route(app,dbModels){
                 res_data.msg  = "用户名重复";
             }
             res.json(res_data);
-         });
+        });
     });
     app.post("/in",function(req,res){
         // req_data post请求的数据
-        var req_data = req;
-
+        var req_data = req.body;
         console.log(req_data);
         dbModels.userModel.findOne({"user":req_data.user,"pass":req_data.pass},function(err,data){
             assert.equal(null,err);
@@ -53,5 +48,32 @@ function route(app,dbModels){
             res.json(res_data);
         });
     });
+    app.post("/app/register",function (req,res) {
+        // post Data
+        var reqData = req.body;
+        console.log(reqData);
+        var newUser = new dbModels.userModel();
+        newUser.user = reqData.user;
+        newUser.pass = reqData.pass;
+        newUser.name = reqData.name;
+        newUser.phone = reqData.phone;
+        newUser.age   = reqData.age;
+        newUser.save(function (err,dataNew,effect) {
+            assert.equal(null,err);
+            if(err){
+                res.json({
+                    code : false
+                });
+            }else{
+                res.json({
+                    code : true
+                });
+            }
+        });
+    });
 }
+
+
+
+var assert = require("assert");
 exports.route = route;

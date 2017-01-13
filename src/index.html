@@ -1,36 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="index" ng-controller="appIndex">
 <head>
     <meta charset="UTF-8">
     <title>angular $scope</title>
-    <style type="text/css">
-        *{
-            padding: 0;
-            margin: 0;
-            font-family: "Microsoft YaHei";
-        }
-        #box{
-            width: 400px;
-            height: 500px;
-            margin: 50px auto;
-            background-color: #2997d0;
-            color: #fff;
-            padding: 5px;
-            line-height: 32px;
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="framework/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="framework/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="framework/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="framework/angular/angular.js"></script>
+    <script type="text/javascript" src="framework/angular/angular-messages.js"></script>
+    <script type="text/javascript" src="js/controller_index.js"></script>
 </head>
-<body ng-app>
-<div id="box">
-    这是一个angular容器
-    <p><input type="text" name="" ng-model="user.name"></p>
-    <p>{{user.name}}</p>
-</div>
+<body>
+    
 </body>
-<script type="text/javascript" src="framework/angular/angular.js"></script>
-<!-- <script type="text/javascript" src="framework/jquery-1.9.1.min.js"></script> -->
-<script type="text/javascript">
-
-
-</script>
 </html>
