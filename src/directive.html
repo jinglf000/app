@@ -58,6 +58,26 @@
     <input type="text" ng-model="repeat">
     <input type="text" ng-model="repeat">
     <p>{{repeat}}</p>
+    <div ng-controller="outerCtrl">
+        <div ng-controller="innerCtrl">
+            <button increaseb> increase b</button>
+            <span ng-bind="b"></span>
+        </div>
+        <button increasea>increase a</button>
+        <span ng-bind="a"></span>
+        <input type="number" ng-model="a">
+    </div>
+
+    <br>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <input type="text" simple-model="simple">
+    <p>测试绑定的值： <span simple-bind="simple"></span></p>
 </body>
 <script>
     var app = angular.module("app",[]);
@@ -150,6 +170,69 @@
             }
         }
     });
+    app.directive("increasea",function () {
+        return function(scope,ele,attr){
+            ele.on("click",function(){
+                scope.a ++;
+//                scope.$digest();
+            });
+        }
+    });
+    app.directive("increaseb",function () {
+        return function(scope,ele,attr){
+            ele.on("click",function(){
+                scope.b ++;
+                scope.$apply();
+            });
+        }
+    });
+    app.controller("outerCtrl", ["$scope","$parse",function($scope,$parse) {
+        console.log($scope);
+        $scope.a = 1;
 
+        $scope.$watch("a", function(newVal,oldVal) {
+            console.log("a:" + newVal + "<---" + oldVal);
+//            console.log("使用$parse 来解析---------------->");
+        });//$watch 查看值的变化
+
+        $scope.$on("test", function(evt) {
+            $scope.a++;
+        });
+    }]);
+    app.controller("innerCtrl", ["$scope", function($scope) {
+        $scope.b = 2;
+
+        $scope.$watch("b", function(newVal) {
+            console.log("b:" + newVal);
+            $scope.$emit("test", newVal);
+        });
+    }]);
+    app.directive("simpleModel",function($parse){
+        return function (scope,ele,attr) {
+            var modelGet = $parse(attr['simpleModel']);
+            console.log(modelGet);
+            var modelSet = modelGet.assign;
+            scope.$watch(modelGet,function(newValue,oldValue){
+                ele.val(newValue);
+            });
+            ele.bind('input',function () {
+                scope.$apply(function () {
+                    var value = ele.val();
+                    modelSet(scope,value);
+                })
+            });
+        }
+    });
+    app.directive("simpleBind",function($parse){
+        return function(scope,ele,att){
+            var modelVal = $parse(att['simpleBind']);
+            scope.simple = "hello simple data";
+            console.log(modelVal());
+            ele.text(modelVal(scope));
+            scope.$watch(modelVal,function(newValue,oldValue){
+                ele.text(modelVal(scope));
+            })
+        }
+    })
 </script>
 </html>
