@@ -7,12 +7,24 @@ var logger         = require('morgan');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var querystring = require("querystring");
+var session = require("express-session");
+var assert = require("assert");
+
 function route(app,dbModels){
     // 路由控制
     app.get("/",function(req,res){
-        res.sendfile("./src/index.html");
-    }).get("/login",function(req,res){
-        res.sendfile("./src/login.html");
+        if(req.session.sign){//检查用户是否已经登录，如果已登录展现的页面
+            res.sendfile("./src/about.html");
+        }else{
+            res.sendfile("./src/views/login.html");
+        }
+    });
+    app.get("/login",function(req,res){
+        if(req.session.sign){//检查用户是否已经登录，如果已登录展现的页面
+            res.sendfile("./src/about.html");
+        }else{
+            res.sendfile("./src/login.html");
+        }
     });
     app.get("/app/userCheck",function (req,res) {
 
@@ -44,6 +56,8 @@ function route(app,dbModels){
             }else{
                 res_data.code = 1;
                 res_data.msg = "登陆成功";
+                req.session.sign = true;
+                req.session.name = req_data.user;
             }
             res.json(res_data);
         });
@@ -75,5 +89,5 @@ function route(app,dbModels){
 
 
 
-var assert = require("assert");
+
 exports.route = route;

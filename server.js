@@ -9,12 +9,14 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var querystring = require("querystring");
 var assert = require("assert");
+var session = require("express-session");
+var cookieParser = require('cookie-parser');
 
 // 创建 erpress
 var app = express();
 function  start() {
 	// 设定 port 变量，访问端口
-	app.set('port', process.env.PORT || 3000);
+	app.set('port', process.env.PORT || 8000);
 	// 设定 视图
 	app.set('views', path.join(__dirname,'views'));
 	// 设定view engine 变量，网页模板引擎
@@ -31,6 +33,14 @@ function  start() {
 	app.use(bodyParser.json());  //body-parser 解析json格式数据
 	app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下面,为参数编码
 	  extended: true
+	}));
+	// 设置解析cookie
+	app.use(cookieParser());
+	app.use(session({
+		secret : "web app test",// 为了安全性的考虑设置secret属性
+		cookie : {maxAge : 60 * 1000 * 10},// 设置过期时间 10 分钟
+		resave : true,
+		saveUninitialized : false
 	}));
 	// 监听端口 port
 	app.listen(app.get('port'));

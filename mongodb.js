@@ -21,7 +21,7 @@ db.on('error',function callback(){
     console.log('数据库连接错误');
 });
 db.once("open",function(){
-    console.log("成功连接数据库！");
+    console.log("成功连接数据库_！");
 });
 
 // 用户类型 schema

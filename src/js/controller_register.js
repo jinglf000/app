@@ -17,7 +17,7 @@ register.controller("regControl",['$scope','$http','$window',function ($scope,$h
         }).then(function (response) {
             if(response.data.code){
                 $window.alert("恭喜你注册成功！");
-                $window.location.href ="/login";
+                $window.location.href ="/";
             }
         },function (response) {
             console.log(response);
