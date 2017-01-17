@@ -18,7 +18,7 @@ login.controller("appLogin",["$scope","$http","$window",function($scope,$http,$w
             // success
             console.log(result,"success");
             if(result.data.code == "1"){
-                $window.location.href = "/";
+                $window.location.href = "/home";
                 // $location.url("index.html");
             }
         },function(data){

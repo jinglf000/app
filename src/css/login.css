@@ -12,6 +12,13 @@
 @media (min-width: 1280px){
 
 }
+body,
+html{
+    background : #d23c39;
+    background : linear-gradient(-20deg, rgba(210, 60, 57, 0.06), rgba(164, 220, 74, 0.63));
+    height: 100%;
+    width: 100%;
+}
 *{
     padding: 0;
     margin: 0;
@@ -19,9 +26,8 @@
     font-family: "Microsoft YaHei";
 }               
 .container{
-    margin: 200px auto 0;
+    padding-top: 200px;
     width: 300px;
-    background-color: rgba(255,255,255,0.9);
 }
 .form-title{
     text-align: center;

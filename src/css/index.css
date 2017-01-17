@@ -1,3 +1,74 @@
+body{
+    /*background-image: -webkit-linear-gradient(top, #E9E9E7 2%, #EFEEEC 27%, #EEEEEC 58%, #D5D4D0 94%);*/
+    background-image: linear-gradient(180deg, #E9E9E7 2%, #EFEEEC 27%, #EEEEEC 58%, #D5D4D0 94%); 
+    background-blend-mode:normal,color-burn;
+}
+html,
+body{
+    height: 100%;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
 .title{
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+    font-weight: lighter;
+}
+.nav li{
+    float: left;
+    font-size: 16px;
+}
+.nav{
+    width: 1000px;
+    margin: 0 auto;
+}
+.nav:after{
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    clear: both;
+}
+/* banner */
+.banner{
+    position: relative;
+    overflow: auto;
+    height: 450px;
+}
+.banner li{
+    list-style: none;
+}
+.banner ul{
+    height: 450px;
+}
+.banner ul li {
+    height: 450px;
+    float: left;
+    background-size : 100% 100%;
+}
+.ban_li_1{
+    background-image: url("../images/plouzane_min.jpg");
+}
+.ban_li_2{
+    background-image: url("../images/dog_min.jpg");
+}
+.ban_li_3{
+    background-image: url("../images/girl_min.jpg");
+}
+.ban_li_4{
+    background-image: url("../images/galaxy_min.jpg");
+}
+.unslider-nav ol li{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+
+footer small{
+    display: block;
     text-align: center;
 }

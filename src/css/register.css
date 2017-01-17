@@ -6,6 +6,7 @@ body{
 
 .container{
     width: 600px;
+    padding-top: 150px;
 }
 .form-title{
     text-align: center;
@@ -36,4 +37,7 @@ input.ng-invalid.ng-dirty:focus{
 }
 .btn{
     width: 120px;
+}
+.has_userid{
+    text-align: right;
 }
