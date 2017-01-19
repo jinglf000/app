@@ -12,17 +12,7 @@ var assert = require("assert");
 
 function route(app,dbModels){
     // 路由控制
-    app.get("/home/userLogin",function(req,res){
-        if(req.session.sign){//检查用户是否已经登录，如果已登录展现的页面
-            res.json({
-                code : true
-            });
-        }else{
-            res.json({
-                code : false
-            });
-        }
-    });
+
     app.get("/login",function(req,res){
         if(req.session.sign){//检查用户是否已经登录，如果已登录展现的页面
             res.sendfile("./src/about.html");
@@ -42,6 +32,17 @@ function route(app,dbModels){
     });
     app.get("/register",function(req,res){
         res.sendfile("./src/register.html");
+    });
+    app.get("/home/userLogin",function(req,res){
+        if(req.session.sign){//检查用户是否已经登录，如果已登录展现的页面
+            res.json({
+                code : true
+            });
+        }else{
+            res.json({
+                code : false
+            });
+        }
     });
     app.get("/app/userCheck",function (req,res) {
 
@@ -102,8 +103,8 @@ function route(app,dbModels){
             }
         });
     });
-    app.get('*',function (req, res) {
-        res.redirect('/home');
+    app.get(/app\d*/,function (req, res) {
+        res.sendfile("./src/index.html");
     });
 }
 

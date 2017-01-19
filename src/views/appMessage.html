@@ -1,0 +1,36 @@
+<div class="container_msg">
+    <div class="home_left" slide-tag="msg_right">
+        <ul>
+            <li><a href="" class="home_has_choiced home_left_a_1">新增</a></li>
+            <li><a href="" >列表</a></li>
+        </ul>
+    </div>
+    <div class="home_right" id="msg_right">
+        <ul>
+            <li class="home_should_show container">
+                <form role="form" novalidate name="msgForm" role="form" class="form-horizontal" >
+                    <div class="form-group">
+                        <label for="msg_name" class="col-sm-2 input_required control-label ">姓名：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="name" class="form-control" ng-model="msg.name" required maxlength="32" id="msg_name" placeholder="姓名">
+                            <span ng-messages="msgForm.name.$error" ng-show="msgForm.name.$dirty && msgForm.name.$invalid"  class="error_msg">
+                                <span ng-message="required">姓名不能为空</span>
+                                <span ng-message="maxlength">姓名太长了</span>
+                            </span>
+                        </div>
+                        <label for="msg_age" class="col-sm-2 input_required control-label ">年龄：</label>
+                        <div class="col-sm-4">
+                            <input type="number" name="name" class="form-control" ng-model="msg.age" required maxlength="32" id="msg_age" placeholder="年龄">
+                            <span ng-messages="msgForm.age.$error" ng-show="msgForm.age.$dirty && msgForm.age.$invalid"  class="error_msg">
+                                <span ng-message="required">姓名不能为空</span>
+                                <span ng-message="maxlength">姓名太长了</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                </form>
+            </li>
+            <li ></li>
+        </ul>
+    </div>
+</div>

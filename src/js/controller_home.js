@@ -2,48 +2,44 @@
  * create 2017-1-16  
  * auto : jinglf
  */
- var appHome = angular.module("appHome",['ngMessages','ngRoute']);
+var appHome = angular.module("appHome",['ngMessages','ngRoute','ngAnimate']);
 appHome.run(function($rootScope,checkUserLogin,$window,$location){
     // 检测用户登录状态
-    var checkUserLogined = function(evet,next,current){
-        checkUserLogin.userPromise.then(function(response){
+    var checkUserLogined = function(e,next,current){
+        var checkUserLoginObj =  new checkUserLogin();
+        checkUserLoginObj.userPromise.then(function(response){
+            // console.log(e,next,current);
             if(!response.data.code){
                 $window.alert("请重新登录！");
                 window.location.href = "login";
-            }else{
-                $location.replace();
             }
         },function(response){
             // 请求拒绝的处理
             // console.log(response);
         });
     };  
-    checkUserLogined();  
-    // 时间绑定
+    // 事件绑定
     $rootScope.$on("$routeChangeStart",checkUserLogined);
 });
 appHome.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
     // 配置路由模式
-    $locationProvider.html5Mode({
-        enabled : true,
-        requireBase : false
-    });
+    $locationProvider.html5Mode(true);
     // 配置路由
-    $routeProvider.when('/person',{
-        templateUrl : 'views/home.html',
+    $routeProvider.when('/appHome',{
+        templateUrl : 'views/appHome.html',
         controller : 'homeController'
     })
-    .when("/message",{
-        templateUrl : 'views/message.html'
+    .when("/appMessage",{
+        templateUrl : 'views/appMessage.html'
     })
-    .when('/markdown',{
-        templateUrl : 'views/markdown.html'
+    .when('/appMarkdown',{
+        templateUrl : 'views/appMarkdown.html'
     })
-    .when("/setting",{
-        templateUrl : "views/setting.html"
+    .when("/appSetting",{
+        templateUrl : "views/appSetting.html"
     })
     .otherwise({
-        redirectTo : "/person"
+        redirectTo : "/"
     });
 }]);
 
@@ -62,13 +58,13 @@ appHome.controller("homeController",function($http,$scope){
 
 });
 
-
-
 // service 服务的 原型定义法，引用实例的时候会 new 一下这个匿名函数
 // factory 服务的 工厂函数定义法，引用实例的时候会  执行一下这个工厂函数，
 // 因此通常情况下，factory 会返回一个对象以供使用
 appHome.service('checkUserLogin', ['$http', function($http){
-    this.userPromise = $http.get("/home/userLogin");
+    return function(){
+        this.userPromise = $http.get("/home/userLogin");
+    };
 }]);
 appHome.directive("slideTag",function(){
     return {
@@ -86,7 +82,7 @@ appHome.directive("slideTag",function(){
                 $(panel).find("li:eq('" + parseInt(this.getAttribute('num')) +"')").addClass("home_should_show");
             });
         }
-    }
+    };
 });
 appHome.directive("hasChoiced",function(){
     return {
@@ -98,5 +94,6 @@ appHome.directive("hasChoiced",function(){
                 $(this).addClass("a_has_choiced");
             });
         }
-    }
-})
+    }; 
+});
+

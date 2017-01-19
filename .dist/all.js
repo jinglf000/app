@@ -7,7 +7,7 @@ var app_index = angular.module("index",["ngMessages"]);
 app_index.config(function ($routeProvider) {
     $routeProvider
         .when('/',{
-            templateUrl : 'views/home.html',
+            templateUrl : 'views/index.html',
             controller : 'homeController'
         })
         .when("/login",{
@@ -57,7 +57,7 @@ login.controller("appLogin",["$scope","$http","$window",function($scope,$http,$w
             console.log(result,"success");
             if(result.data.code == "1"){
                 $window.location.href = "/";
-                // $location.url("index.html");
+                // $location.url("home.html");
             }
         },function(data){
             // fail

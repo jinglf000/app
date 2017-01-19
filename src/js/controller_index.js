@@ -22,7 +22,7 @@ $(function(){
 // app_index.config(function ($routeProvider) {
 //     $routeProvider
 //         .when('/',{
-//             templateUrl : 'views/home.html',
+//             templateUrl : 'views/index.html',
 //             controller : 'homeController'
 //         })
 //         .when("/login",{
