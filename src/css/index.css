@@ -72,6 +72,7 @@ html,body{
 .container-fluid{
     position: relative;
     padding-top: 62px;
+    overflow: hidden;
 }
 
 .home_left{
@@ -84,6 +85,7 @@ html,body{
     border-radius: 5px;
     box-shadow: 2px 2px 3px #ccc;
     z-index: 20;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 9s;
 }
 .home_left li{
     line-height: 32px;
@@ -130,39 +132,20 @@ html,body{
 .home_right li.home_should_show{
     display: block;
 }
-/* 切换动画 animation */
-.view-animate-container {
-  position:relative;
-  height:100px!important;
-  background:white;
-  border:1px solid black;
-  height:40px;
-  overflow:hidden;
-}
-.view-animate {
-  padding:10px;
-  position: relative;
+/* 切换动画 animation，通用状态，运动和离开时 */
+.view-animate.ng-enter ,
+.view-animate.ng-leave {
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 15s;
 }
 
-.view-animate.ng-enter, .view-animate.ng-leave {
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-  display:block;
-  width:100%;
-  border-left:1px solid black;
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:10px;
+.view-animate.ng-enter .home_left{
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s;
 }
-
-.view-animate.ng-enter {
-  left:100%;
+/* 进入最终状态 */
+.view-animate.ng-enter.ng-enter-active .home_left{
+    left:0;
 }
-.view-animate.ng-enter.ng-enter-active {
-  left:0;
-}
+/* 离开 */
 .view-animate.ng-leave.ng-leave-active {
-  left:-100%;
+    opacity: 0;
 }
