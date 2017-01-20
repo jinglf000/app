@@ -32,6 +32,10 @@ html,body{
     background-blend-mode: normal,color-burn ;
     height: 100%;
 }
+.input_required:before{
+    content: "* ";
+    color: red;
+}
 .header{
     height: 62px;
     background-color: #fff;
@@ -55,6 +59,7 @@ html,body{
     font-size: 16px;
     padding: 10px 25px;
     transition: background-color .5s;
+    font-weight: bolder;
 }
 .nav .nav_li_last{
     float: right;
@@ -72,7 +77,6 @@ html,body{
 .container-fluid{
     position: relative;
     padding-top: 62px;
-    overflow: hidden;
 }
 
 .home_left{
@@ -93,9 +97,11 @@ html,body{
     cursor: pointer;
 }
 .home_left li a{
-    padding: 0 10px;
+    padding: 0 20px;
     display: block;
     transition: background-color .5s ease .1s;
+    font-weight: bold;
+    font-style: italic;
 }
 .home_left li a.home_has_choiced{
     color: #2a6496;
@@ -119,13 +125,13 @@ html,body{
     clear: both;
     display: block;
 }
-.home_right li{
+.home_right > ul > li{
     width: 100%;
     height: 500px;
     box-sizing: border-box;
     padding:  20px;
     border-radius: 5px;
-    box-shadow: 1px 2px 2px #ccc;
+    box-shadow: 1px 2px 2px #999;
     background-color: #4ae4d4;
     display: none;
 }
@@ -135,17 +141,48 @@ html,body{
 /* 切换动画 animation，通用状态，运动和离开时 */
 .view-animate.ng-enter ,
 .view-animate.ng-leave {
-    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 15s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    opacity: 1;
 }
 
-.view-animate.ng-enter .home_left{
-    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s;
+.view-animate.ng-leave {
+    display: none;
 }
-/* 进入最终状态 */
+/* home-left---- 开始 */
+.view-animate.ng-enter .home_left{
+    transition: left cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    left: -150px;
+}
+/* 进入最终 */
 .view-animate.ng-enter.ng-enter-active .home_left{
     left:0;
 }
-/* 离开 */
-.view-animate.ng-leave.ng-leave-active {
+/* 离开开始 */
+.view-animate.ng-leave .home_left{
+    transition: opacity cubic-bezier(0.250, 0.460, 0.450, 0.940) .4s;
+    opacity: 0.5;    
+}
+/* 离开最终 */
+.view-animate.ng-leave.ng-leave-active .home_left{
+    opacity: 0;
+}
+/* ========home_right   进入开始========= */
+.view-animate.ng-enter .home_right{
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    opacity: 0.5;
+    margin-top: 50px;
+}
+/* 进入最终 */
+.view-animate.ng-enter.ng-enter-active .home_right{
+    opacity: 1;
+    margin-top: 20px;
+}
+/* 离开开始 */
+.view-animate.ng-leave .home_right{
+    display: none;
+} 
+/* 离开最终 */
+.view-animate.ng-leave.ng-leave-active .home_right{
+    margin-top: 100px;
     opacity: 0;
 }

@@ -55,7 +55,14 @@ appHome.controller("appHomeController",['$http','$scope','$window',function($htt
 }]);
 // 主页
 appHome.controller("homeController",function($http,$scope){
-
+    $scope.showList = function(){
+       $scope.list = [
+            {name : "王二狗",age  : 26},
+            {name : "张全蛋",age  : 29},
+            {name : "狗尾巴草",age  : 26},
+            {name : "小红",age  : 26}
+        ]; 
+    };
 });
 
 // service 服务的 原型定义法，引用实例的时候会 new 一下这个匿名函数

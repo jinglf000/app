@@ -10,7 +10,20 @@
     </div>
     <div class="home_right" id="home_right" app-alert>
         <ul>
-            <li class="home_should_show">flat ONE</li>
+            <li class="home_should_show">
+                <div class=" form-horizontal"> 
+                    <label class="control-label col-sm-3">这里是一个列表：</label>
+                    <div class="col-sm-6">
+                        <input type="search" placeholder="选择..." ng-model="filter.q" aria-label="filter friends" class="form-control ">
+                    </div>
+                    <div class="col-sm-3">
+                        <button ng-click="showList()" class="btn btn-primary">显示列表</button>
+                    </div>
+                </div>
+                <ul>
+                    <li ng-repeat=" per in list | filter:filter.q as results">[{{$index + 1}}]、{{per.name}} </li>
+                </ul>
+            </li>
             <li ></li>
             <li ></li>
             <li ></li>
