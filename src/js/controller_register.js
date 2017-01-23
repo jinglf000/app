@@ -40,18 +40,17 @@ register.directive("checkUser",['$http','$q',function($http,$q){
                     return false;
                 }
                 return true;
-        };
-        ctrl.$asyncValidators.checkUserAsync = function (modelValue,viewValue) {
-            var value = modelValue || viewValue;
-            // var deferred = $q.defer();
-            return $http.get('/app/userCheck?user='+value).then(function (response) {
-                //success
-                console.log(response.data.code);
-                if(response.data.code){
-                    return $q.reject();
-                }
-            });
-        };
+            };
+            ctrl.$asyncValidators.checkUserAsync = function (modelValue,viewValue) {
+                var value = modelValue || viewValue;
+                // var deferred = $q.defer();
+                return $http.get('/app/userCheck?user='+value).then(function (response) {
+                    //success
+                    if(response.data.code){
+                        return $q.reject();
+                    }
+                });
+            };
         }
     };
 }]);

@@ -10,27 +10,74 @@
             <li class="home_should_show container">
                 <form role="form" novalidate name="msgForm" role="form" class="form-horizontal" >
                     <div class="form-group">
-                        <label for="msg_name" class="col-sm-2 input_required control-label ">姓名：</label>
+                        <label for="msg-name" class="col-sm-2 input_required control-label ">姓名：</label>
                         <div class="col-sm-4">
-                            <input type="text" name="name" class="form-control" ng-model="msg.name" required maxlength="32" id="msg_name" placeholder="姓名">
-                            <span ng-messages="msgForm.name.$error" ng-show="msgForm.name.$dirty && msgForm.name.$invalid"  class="error_msg">
+                            <input type="text" name="name" class="form-control" ng-model="msg.name" required maxlength="32" id="msg-name" placeholder="姓名">
+                            <span ng-messages="msgForm.name.$error" ng-show="msgForm.name.$dirty && msgForm.name.$invalid && msgForm.name.$touched"  class="error_msg"  role="alert">
                                 <span ng-message="required">姓名不能为空</span>
                                 <span ng-message="maxlength">姓名太长了</span>
                             </span>
                         </div>
-                        <label for="msg_age" class="col-sm-2 input_required control-label ">年龄：</label>
+                        <label for="msg-age" class="col-sm-2 input_required control-label ">年龄：</label>
                         <div class="col-sm-4">
-                            <input type="number" name="name" class="form-control" ng-model="msg.age" required maxlength="32" id="msg_age" placeholder="年龄">
-                            <span ng-messages="msgForm.age.$error" ng-show="msgForm.age.$dirty && msgForm.age.$invalid"  class="error_msg">
-                                <span ng-message="required">姓名不能为空</span>
-                                <span ng-message="maxlength">姓名太长了</span>
+                            <input type="number" name="age" class="form-control" ng-model="msg.age" required maxlength="32" id="msg-age" placeholder="年龄">
+                            <span ng-messages="msgForm.age.$error" ng-show="msgForm.age.$dirty && msgForm.age.$invalid && msgForm.age.$touched"  class="error_msg">
+                                <span ng-message="required">年龄不能为空</span>
+                                <span ng-message="maxlength">年龄太长了</span>
                             </span>
                         </div>
                     </div>
-                    
+                    <div class="form-group">
+                        <label for="msg-height" class="col-sm-2 input_required control-label">身高：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="height" class="form-control" ng-model="msg.height" required maxlength="32" id="msg-height" placeholder="单位：cm">
+                            <span ng-messages="msgForm.height.$error" ng-show="msgForm.height.$dirty && msgForm.height.$invalid && msgForm.height.$touched">
+                                <span ng-message="required">身高不能为空呐</span>
+                            </span>
+                        </div>
+                        <label for="msg-weight" class="col-sm-2 input_required control-label">体重：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="weight" class="form-control" ng-model="msg.weight" required maxlength="32" id="msg-weight" id="msg-weight" placeholder="单位：kg">
+                            <span class="error_msg" ng-messages="msgForm.weight.$error" ng-show="msgForm.weight.$dirty && msgForm.weight.$invalid && msgForm.weight.$touched">
+                                <span ng-message="required">体重也不能为空呀</span>
+                            </span>
+                        </div>
+                    </div>              
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label input_required">性别：</label>
+                        <div class="col-sm-4 ">
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" value="男" checked>男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" value="女">女
+                            </label>
+                        </div>
+                        <label for="msg-phone" class="col-sm-2 input_required control-label">电话：</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="phone" class="form-control" ng-model="msg.phone" required maxlength="32" id="msg-phone" id="msg-phone" placeholder="电话" check-phone>
+                            <span class="error_msg" ng-messages="msgForm.phone.$error" ng-show="msgForm.phone.$dirty && msgForm.phone.$invalid && msgForm.phone.$touched">
+                                <span ng-message="required">电话不能为空</span>
+                                <span ng-message="checkPhone">电话格式不正确呀</span>
+                            </span>
+                        </div>
+                    </div>              
                 </form>
             </li>
-            <li ></li>
+            <li class="">
+                <div class=" form-horizontal"> 
+                    <label class="control-label col-sm-3">这里是一个列表：</label>
+                    <div class="col-sm-6">
+                        <input type="search" placeholder="选择..." ng-model="filter.q" aria-label="filter friends" class="form-control ">
+                    </div>
+                    <div class="col-sm-3">
+                        <button ng-click="showList()" class="btn btn-primary">显示列表</button>
+                    </div>
+                </div>
+                <ul class="home-list-container">
+                    <li ng-repeat=" per in list | filter:filter.q as results" class="home-list-li">[{{$index + 1}}]、{{per.name}} </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

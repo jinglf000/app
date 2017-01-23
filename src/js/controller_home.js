@@ -11,8 +11,12 @@ appHome.run(function($rootScope,checkUserLogin,$window,$location){
             // console.log(e,next,current);
             if(!response.data.code){
                 $window.alert("请重新登录！");
-                window.location.href = "login";
+                $window.location.href = "login";
             }
+            // else{
+                // angular.element(document).find('.a_has_choiced').removeClass('a_has_choiced');
+                // angular.element(document).find('a[href="'+$location.$$path+'"]').addClass('a_has_choiced');
+            // }
         },function(response){
             // 请求拒绝的处理
             // console.log(response);
@@ -21,16 +25,18 @@ appHome.run(function($rootScope,checkUserLogin,$window,$location){
     // 事件绑定
     $rootScope.$on("$routeChangeStart",checkUserLogined);
 });
+// 配置
 appHome.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
     // 配置路由模式
     $locationProvider.html5Mode(true);
     // 配置路由
     $routeProvider.when('/appHome',{
         templateUrl : 'views/appHome.html',
-        controller : 'homeController'
+        controller : 'appHomeController'
     })
     .when("/appMessage",{
-        templateUrl : 'views/appMessage.html'
+        templateUrl : 'views/appMessage.html',
+        controller: "appMessageController"
     })
     .when('/appMarkdown',{
         templateUrl : 'views/appMarkdown.html'
@@ -42,8 +48,8 @@ appHome.config(['$routeProvider','$locationProvider',function($routeProvider,$lo
         redirectTo : "/"
     });
 }]);
-
-appHome.controller("appHomeController",['$http','$scope','$window',function($http,$scope,$window){
+// index
+appHome.controller("indexController",['$http','$scope','$window',function($http,$scope,$window){
     // 退出登录
     $scope.logout = function(e){
         $http.get("/logout").then(function(response){
@@ -54,8 +60,12 @@ appHome.controller("appHomeController",['$http','$scope','$window',function($htt
     };
 }]);
 // 主页
-appHome.controller("homeController",function($http,$scope){
-    $scope.showList = function(){
+appHome.controller("appHomeController",function($http,$scope){
+    
+});
+// message
+appHome.controller('appMessageController',function($scope){
+     $scope.showList = function(){
        $scope.list = [
             {name : "王二狗",age  : 26},
             {name : "张全蛋",age  : 29},
@@ -64,7 +74,6 @@ appHome.controller("homeController",function($http,$scope){
         ]; 
     };
 });
-
 // service 服务的 原型定义法，引用实例的时候会 new 一下这个匿名函数
 // factory 服务的 工厂函数定义法，引用实例的时候会  执行一下这个工厂函数，
 // 因此通常情况下，factory 会返回一个对象以供使用
@@ -78,6 +87,7 @@ appHome.directive("slideTag",function(){
         restrict : "A",
         link   : function(scope,element,attrs){
             var $ = angular.element;
+            // 路由状态判断
             element.find("li a").each(function(index,ele){
                 $(ele).attr('num',index);
             });
@@ -96,6 +106,7 @@ appHome.directive("hasChoiced",function(){
         restrict : "A",
         link : function(scope,ele,attrs){
             var $ = angular.element;
+            $(document).find("a[href='"+ window.location.pathname +"']").addClass('a_has_choiced');
             ele.on("click","a",function(e){
                 ele.find(".a_has_choiced").removeClass('a_has_choiced');
                 $(this).addClass("a_has_choiced");
@@ -103,4 +114,10 @@ appHome.directive("hasChoiced",function(){
         }
     }; 
 });
-
+appHome.directive("checkPhone",function(){
+    return {
+        restrict : "A",
+        require : "?ngModle"
+        link
+    }
+});
