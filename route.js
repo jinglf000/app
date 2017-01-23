@@ -45,7 +45,6 @@ function route(app,dbModels){
         }
     });
     app.get("/app/userCheck",function (req,res) {
-
         var user_data = req.query.user;
         console.log(user_data);
         dbModels.userModel.findOne({"user":user_data},function(err,data){
@@ -61,6 +60,7 @@ function route(app,dbModels){
             res.json(res_data);
         });
     });
+    //  登录
     app.post("/in",function(req,res){
         // req_data post请求的数据
         var req_data = req.body;
@@ -80,6 +80,7 @@ function route(app,dbModels){
             res.json(res_data);
         });
     });
+    // 注册
     app.post("/app/register",function (req,res) {
         // post Data
         var reqData = req.body;
@@ -102,6 +103,64 @@ function route(app,dbModels){
                 });
             }
         });
+    });
+    // 新增信息
+    app.post("/app/infoAdd",function (req,res) {
+        if(!req.session.sign){res.redirect("/login");};
+        var reqData = req.body;
+        console.log(reqData);
+        var newInfo = new dbModels.appInfoModel();
+        newInfo.name = reqData.name;
+        newInfo.age = reqData.age;
+        newInfo.height = reqData.height;
+        newInfo.weight = reqData.weight;
+        newInfo.sex = reqData.sex;
+        newInfo.phone = reqData.phone;
+        newInfo.email = reqData.email;
+        newInfo.address = reqData.address;
+        newInfo.info    = reqData.info;
+        newInfo.save(function(err,dataNew,effect){
+            assert.equal(null,err);
+            if(err){
+                res.json({
+                    code : false
+                });
+            }else{
+                res.json({
+                    code : true
+                });
+            }
+        });
+    });
+    // 查询信息
+    app.get("/app/infoSearch",function(req,res){
+        if(!req.session.sign){res.redirect("/login");};
+        var reqData = req.query.name;
+        console.log(reqData);
+        var query;
+        if(reqData){
+            query = {
+                'name' : /[\w\W]/
+            }
+        }else{
+            query = {
+                'name' : new RegExp(reqData)
+            }
+        }
+        dbModels.appInfoModel.find(query,function(err,list){
+            assert.equal(null,err);
+            if(list){
+                res.json({
+                    list : list,
+                    length : list.length
+                });
+            }else{
+                res.json({
+                    list : list,
+                    length : list.length
+                });
+            }
+        })
     });
     app.get(/app\d*/,function (req, res) {
         res.sendfile("./src/index.html");

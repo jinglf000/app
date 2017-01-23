@@ -64,14 +64,33 @@ appHome.controller("appHomeController",function($http,$scope){
     
 });
 // message
-appHome.controller('appMessageController',function($scope){
-     $scope.showList = function(){
-       $scope.list = [
-            {name : "王二狗",age  : 26},
-            {name : "张全蛋",age  : 29},
-            {name : "狗尾巴草",age  : 26},
-            {name : "小红",age  : 26}
-        ]; 
+appHome.controller('appMessageController',function($scope,$http,$window){
+    // 新增信息
+    $scope.submitMessage = function(){
+        var posData = $scope.msg;
+        $http.post("/app/infoAdd",posData).then(function(response){
+            if(response.data.code){
+                $window.alert("保存成功");
+            }else{
+                $window.alert("保存失败");
+            }
+        },function(response){
+            console.log(response);
+        });
+    };
+    $scope.search = {
+        info : "",
+        list : null
+    };
+    // 信息查询
+    $scope.appMsgSearch = function(){
+        var postData = $scope.search.info ;
+        $http.get("/app/infoSearch?name="+postData).then(function(response){
+            console.log(response);
+            $scope.search.list = response.data.list;
+        },function(response){
+
+        });
     };
 });
 // service 服务的 原型定义法，引用实例的时候会 new 一下这个匿名函数
@@ -82,6 +101,14 @@ appHome.service('checkUserLogin', ['$http', function($http){
         this.userPromise = $http.get("/home/userLogin");
     };
 }]);
+
+
+/**
+ * 自定义指令，directive 也是一种服务，规则是函数必须返回固定值的对象，使用的是factory工厂模式
+ * 服务定义方式中：factory 对应对象构造器中的工厂模式  
+ * service：对应 对象构造器中的 构造函数模式
+ * 
+ */
 appHome.directive("slideTag",function(){
     return {
         restrict : "A",
@@ -101,12 +128,13 @@ appHome.directive("slideTag",function(){
         }
     };
 });
-appHome.directive("hasChoiced",function(){
+appHome.directive("hasChoiced",function($location){//我是想了半天怎么注入，原来在这里就可以
     return {
         restrict : "A",
-        link : function(scope,ele,attrs){
+        require : "?ngModel",
+        link : function(scope,ele,attrs,ngModel){
             var $ = angular.element;
-            $(document).find("a[href='"+ window.location.pathname +"']").addClass('a_has_choiced');
+            $(document).find("a[href='"+ $location.$$path +"']").addClass('a_has_choiced');
             ele.on("click","a",function(e){
                 ele.find(".a_has_choiced").removeClass('a_has_choiced');
                 $(this).addClass("a_has_choiced");
@@ -117,7 +145,17 @@ appHome.directive("hasChoiced",function(){
 appHome.directive("checkPhone",function(){
     return {
         restrict : "A",
-        require : "?ngModle"
-        link
-    }
+        require : "?ngModel",
+        link : function(scope,ele,attrs,ngModel){
+            var  valid_phone = /^1\d{10}$/;
+            ngModel.$validators.checkPhone = function(modelValue,viewValue){
+                var value = modelValue || viewValue;
+                if(!valid_phone.test(value)){
+                    return false;
+                }else{
+                    return true;
+                }
+            };
+        }
+    };
 });

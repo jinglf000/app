@@ -50,6 +50,18 @@ dbSchemas.userSchema = new schema({
         required : true
     }
 });
+dbSchemas.appInfoSchema = new schema({
+    name    : String,
+    age     : Number,
+    height  : Number,
+    weight  : Number,
+    sex     : String,
+    phone   : String,
+    email   : String,
+    address : String,
+    info    : String
+});
 dbModels.userModel = mongoose.model('logins',dbSchemas.userSchema);
+dbModels.appInfoModel = mongoose.model('appInfos',dbSchemas.appInfoSchema);
 
 exports.dbModels = dbModels;
