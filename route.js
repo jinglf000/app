@@ -177,8 +177,12 @@ function route(app,dbModels){
     app.post("/app/infoEdit",function(req,res){
         var reqData = req.body;
         console.log(reqData);
-        dbModels.appInfoModel.update(reqData,function(err,docs){
-            assert.equal(null,err);
+        var query = {
+            "_id" : reqData._id
+        }
+        delete reqData._id;
+        dbModels.appInfoModel.update(query,reqData,function(err,docs){
+            // assert.equal(null,err);
             if(err){
                 res.json({
                     code : false

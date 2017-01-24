@@ -115,8 +115,16 @@ appHome.controller('appMessageController',function($scope,$http,$window){
     // $scope.appMsgEditShow = function(index){
     // };
     $scope.appMsgEditFn = function(index){
-        $scope.appMsgEditFlag = true;
+        $scope.appMsgEditFlag = {
+            flag : true,
+            nowEditIndex : index
+        };
         $scope.edit = $scope.search.list[index];
+        $scope.dataCache = {};
+        for(x in $scope.edit){
+            $scope.dataCache[x]  = $scope.edit[x];
+        };
+
     };
     // 修改提交 
     $scope.appMsgEditSubmit = function(){
@@ -125,9 +133,12 @@ appHome.controller('appMessageController',function($scope,$http,$window){
         $http.post("/app/infoEdit",postData).then(function(response){
             if(response.data.code){
                 alert("修改成功");
+                $scope.appMsgEditFlag.flag = false;
             }else{
+                $scope.search.list[$scope.appMsgEditFlag.nowEditIndex] = $scope.dataCache;
                 alert("修改失败");
             }
+            $scope.dataCache = null;
         },function(response){
 
         });
