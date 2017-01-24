@@ -82,12 +82,52 @@ appHome.controller('appMessageController',function($scope,$http,$window){
         info : "",
         list : null
     };
+    $scope.$watch("appMsgEditFlag",function(oldVal,newVal){
+        console.log(oldVal,newVal);
+    });
+    // $scope.appMsgEditFlag = false;
     // 信息查询
     $scope.appMsgSearch = function(){
         var postData = $scope.search.info ;
         $http.get("/app/infoSearch?name="+postData).then(function(response){
             console.log(response);
             $scope.search.list = response.data.list;
+        },function(response){
+
+        });
+    };
+    // 信息删除
+    $scope.appMsgDelete = function(index){
+        var postData = $scope.search.list[index]._id;
+        $http.get("/app/infoDelete?id="+postData).then(function(response){
+            if(response.data.code){
+                // 删除成功
+                $scope.search.list.splice(index,1);
+            }else{
+                alert("删除失败");
+            }
+        },function(response){
+
+        });
+    };
+    // $scope.appMsgEditFlag = true;
+    // // 显示信息编辑
+    // $scope.appMsgEditShow = function(index){
+    // };
+    $scope.appMsgEditFn = function(index){
+        $scope.appMsgEditFlag = true;
+        $scope.edit = $scope.search.list[index];
+    };
+    // 修改提交 
+    $scope.appMsgEditSubmit = function(){
+        var postData = $scope.edit;
+        console.log(postData);
+        $http.post("/app/infoEdit",postData).then(function(response){
+            if(response.data.code){
+                alert("修改成功");
+            }else{
+                alert("修改失败");
+            }
         },function(response){
 
         });
@@ -156,6 +196,22 @@ appHome.directive("checkPhone",function(){
                     return true;
                 }
             };
+        }
+    };
+});
+
+/**
+ * 注册过滤器
+ * 字符超长显示...
+ */
+appHome.filter("limitLong" , function(){
+    return function(input){
+        if(input){
+            if (input.length >= 10) {
+                return input.slice(0, 10) + "...";
+            }else{
+                return input;
+            }
         }
     };
 });

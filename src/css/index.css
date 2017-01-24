@@ -39,7 +39,8 @@ textarea.ng-not-empty.ng-valid{
     border-color: green;
 }
 html,body{
-    background-image :linear-gradient(180deg, #E9E9E7 2%, #EFEEEC 27%, #EEEEEC 58%, #D5D4D0 94%);
+    /*background-image :linear-gradient(180deg, #E9E9E7 2%, #EFEEEC 27%, #EEEEEC 58%, #D5D4D0 94%);*/
+    background-color: rgba(213, 212, 208, 0.24);
     background-blend-mode: normal,color-burn ;
     height: 100%;
 }
@@ -57,6 +58,9 @@ html,body{
     color: red;
     font-size: 12px;
     position: absolute;
+}
+.table-hover>tbody>tr:hover{
+    background-color: #dff0d8;
 }
 /* 通用样式结束 */
 .header{
@@ -153,7 +157,6 @@ html,body{
 }
 .home_right > ul > li{
     width: 100%;
-    height: 500px;
     box-sizing: border-box;
     padding:  20px;
     border-radius: 5px;
@@ -241,4 +244,70 @@ html,body{
     opacity: 1;
     /* 告诉ng-animation 对应的元素，他的高度是缓慢增加的，最大为max-height*/
     max-height: 30px;
+}
+.table-msg td,
+.table-msg th{
+    text-align: center;
+}
+.table-msg{
+    margin-top: 20px;
+}
+.btn-i-table{
+    width: 60px;
+    font-size: 12px;
+    height: 18px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.appMsgList.ng-leave{
+    transition: all linear .5s;
+    position: relative;
+    height: 37px;
+}
+.appMsgList.ng-leave.ng-leave-active{
+    opacity: 0;
+    height: 0px;
+}
+/* 弹窗修改层 */
+.EditCover {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background-color: #fff;
+    opacity: 0.5;
+}
+.appMsgEdit form{
+    background-color: #fff;
+    z-index: 102;
+    position: fixed;
+    width: 720px;
+    padding: 20px;
+    height: 360px;
+    left: 50%;
+    top: 50%;
+    margin-left: -360px;
+    margin-top: -180px; 
+    box-shadow: 1px 1px 12px #ccc;
+    font-size: 12px;
+    border-radius: 4px;
+}
+.appMsgEdit .form-control {
+    height: 24px;
+    font-size: 12px;
+}
+.appMsgEdit .form-horizontal .control-label{
+    padding-top: 4px;
+}
+.appMsgEdit .form-horizontal .radio-inline{
+    padding-top: 4px;
+}
+.appMsgEdit .form-horizontal textarea{
+    height: 50px;
+    resize: none;
+}
+.appMsgEdit .form-horizontal input[type='radio'] {
+    margin-top: 1px;
 }

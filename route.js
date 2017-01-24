@@ -12,7 +12,6 @@ var assert = require("assert");
 
 function route(app,dbModels){
     // 路由控制
-
     app.get("/login",function(req,res){
         if(req.session.sign){//检查用户是否已经登录，如果已登录展现的页面
             res.sendfile("./src/about.html");
@@ -138,7 +137,7 @@ function route(app,dbModels){
         var reqData = req.query.name;
         console.log(reqData);
         var query;
-        if(reqData){
+        if(!reqData){
             query = {
                 'name' : /[\w\W]/
             }
@@ -161,6 +160,35 @@ function route(app,dbModels){
                 });
             }
         })
+    });
+    app.get('/app/infoDelete',function(req,res){
+        if(!req.session.sign){res.redirect("/login");};
+        var reqData = req.query.id;
+        var query = { "_id" : reqData};
+        dbModels.appInfoModel.remove(query,function(err,docs){
+            assert.equal(null,err);
+            if(docs){
+                res.json({"code" : true});
+            }else{
+                res.json({"code" : false});
+            }
+        });
+    });
+    app.post("/app/infoEdit",function(req,res){
+        var reqData = req.body;
+        console.log(reqData);
+        dbModels.appInfoModel.update(reqData,function(err,docs){
+            assert.equal(null,err);
+            if(err){
+                res.json({
+                    code : false
+                });
+            }else{
+                res.json({
+                    code : true
+                });
+            }
+        });
     });
     app.get(/app\d*/,function (req, res) {
         res.sendfile("./src/index.html");
