@@ -311,3 +311,48 @@ html,body{
 .appMsgEdit .form-horizontal input[type='radio'] {
     margin-top: 1px;
 }
+#home_right .home_should_show{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+    align-items: flex-start;
+    align-content: flex-start;
+    height: 600px;
+}
+.home_should_show div{
+    flex: auto;
+    text-align: center;
+    height: 200px;
+    font-size: 48px;
+    line-height: 96px;
+    margin: auto;
+}
+#home_right .show1{
+/*    order: 1;
+    flex-grow: 0;
+    flex-shrink : 0;*/
+    flex: initial;
+    width: 200px;
+    min-width: 100px;
+    background-color: #2997d0;
+}
+#home_right .show2{
+    /*flex-grow: 2;*/
+    /*order: 2;
+    height: 250px;
+    align-self: flex-end;*/
+    flex: none;
+    width: 200px;
+    background-color: #29d078;
+}
+#home_right .show3{
+    flex: 1 1 auto;
+    background-color: #de570f;
+    /*height: 300px;*/
+}
+#home_right .show4{
+    flex: 2 1 auto;
+    /*order: 4;*/
+    background-color: #d70fde;
+}

@@ -16,7 +16,7 @@ var cookieParser = require('cookie-parser');
 var app = express();
 function  start() {
 	// 设定 port 变量，访问端口
-	app.set('port', process.env.PORT || 8080);
+	app.set('port', process.env.PORT || 80);
 	// 设定 视图
 	app.set('views', path.join(__dirname,'views'));
 	// 设定view engine 变量，网页模板引擎
@@ -38,7 +38,7 @@ function  start() {
 	app.use(cookieParser());
 	app.use(session({
 		secret : "web app test",// 为了安全性的考虑设置secret属性
-		cookie : {maxAge : 60 * 1000 * 30},// 设置过期时间 10 分钟
+		cookie : {maxAge : 60 * 1000 * 300},// 设置过期时间 10 分钟
 		resave : true,
 		saveUninitialized : false
 	}));
